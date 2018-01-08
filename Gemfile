@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'jquery-rails'
 gem 'bcrypt',         '3.1.11'
 gem 'faker',          '1.7.3'
