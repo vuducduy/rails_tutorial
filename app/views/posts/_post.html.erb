@@ -9,7 +9,7 @@
         <p class="card-text">
           <%= post.content %>
         </p>
-        <a href="#" class="btn btn-primary">Read More →</a>
+        <%= link_to "Read More", post_path(post), class: "btn btn-primary" %>
   </div>
 
   <div class="card-footer text-muted">
