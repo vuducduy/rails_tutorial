@@ -2,33 +2,36 @@
   <img class="card-img-top" src="<%= @post.image_url %>" alt="Card image cap">
 
   <div class="card-body">
-        <h2 class="card-title">
-          <%= @post.title %>
-
-        </h2>
-        <p class="card-text">
-          <%= @post.content %>
-        </p>
-        <a href="#" class="btn btn-primary"></a>
+    <h2 class="card-title"><%= @post.title %></h2>
+    <p class="card-text">
+      <%= @post.content %>
+    </p>
+    <a href="#" class="btn btn-primary"></a>
   </div>
 
   <div class="card-footer text-muted">
-  <%= form_for @comment do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :post_id, value: current_user.id %>
-    <div class="input-group mb-3">
-      <%= f.text_field :content,
-        class: "form-control",
-        placeholder: "Write Something about this...",
-        aria: {
-          label:"Enter your content",
-          describedby: "basic-addon2"
-        }%>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Accept</button>
+    <%= form_for @comment, remote: true do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :post_id, value: current_user.id %>
+      <div class="input-group mb-3">
+        <%= f.text_field :content,
+          class: "form-control",
+          placeholder: "Write Something about this...",
+          aria: {
+            label:"Enter your content",
+            describedby: "basic-addon2"
+          }%>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">Accept</button>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <div class="list-comments">
+    <% @comments.each do |comment| %>
+      <%= render partial:"comments/comment", locals: {comment: comment} %>
+    <% end %>
   </div>
 
 </div>

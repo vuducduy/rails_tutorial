@@ -20,8 +20,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    redirect_to root_url and return unless @post
+    @comments = @post.comments.order(created_at: :desc)
     @comment = Comment.new
+    redirect_to root_url and return unless @post
   end
 
   private
