@@ -1,6 +1,6 @@
-<div class="media">
+<div class="media" id="comment-<%= comment.id%>">
   <%= gravatar_for (comment.user)%>
-  <div class="media-body">
+  <div class="media-body comment-content">
     <h5 class="mt-0">
       <%= comment.user.name%>
       <small>
@@ -8,5 +8,8 @@
       </small>
     </h5>
     <%= comment.content%>
-    <%= link_to "Edit", edit_comment_path(comment) %>
+    <%= link_to "Edit", edit_post_comment_path(comment, post_id: @post.id), remote: true %>
+    <%= link_to "Delete", [@post, comment], method: :delete, remote:true, data: { confirm: "You sure?" } %>
+  </div>
+  <div class="edit-form"></div>
 </div>

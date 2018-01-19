@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :load_comment, only: [:edit, :update]
+  before_action :logged_in_user
+  before_action :load_comment, only: [:edit, :update, :destroy]
+  before_action :load_post
+
   def create
     @comment = Comment.new comment_params
     if @comment.save
@@ -23,15 +26,41 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update_attributes comment_params
-      flash[:success] =  "update comment successfully"
-      redirect_to @comment.post
+      respond_to do |format|
+        format.html
+        format.js
+        format.json
+      end
     else
-      flash.now[:danger] = "update comment failed"
-      render :edit
+      respond_to do |format|
+        format.html
+        format.js
+        format.json
+      end
     end
   end
 
   def destroy
+    if @comment.destroy
+       respond_to do |format|
+        format.html
+        format.js
+        format.json
+      end
+    else
+       respond_to do |format|
+        format.html
+        format.js
+        format.json
+      end
+    end
+    # Comment.find(params[:id]).destroy
+    # # respond_to do |format|
+    # #     format.html
+    # #     format.js
+    # #     format.json
+    # #   end
+    # redirect_to comments_url
 
   end
 
@@ -42,7 +71,14 @@ class CommentsController < ApplicationController
   end
 
   def load_comment
-    @comment = Comment.find_by id: params[:id]
+    @comment = current_user.comments.find_by id: params[:id]
+    return if @comment
+      flash[:danger]="Access denied!"
     redirect_to root_path unless @comment
+  end
+
+  def load_post
+    @post = Post.find_by id:params[:post_id]
+    redirect_to root_path unless @post
   end
 end

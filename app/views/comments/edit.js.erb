@@ -1,0 +1,2 @@
+$('#comment-<%= @comment.id%>').find('.comment-content').first().hide();
+$('#comment-<%= @comment.id%>').find('.edit-form').html('<%= j render "comments/form" %>');

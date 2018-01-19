@@ -1,0 +1,16 @@
+<%= form_for [@post, @comment], remote: true do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :post_id, value: current_user.id %>
+  <div class="input-group mb-3">
+    <%= f.text_field :content,
+      class: "form-control",
+      placeholder: "Write Something about this...",
+      aria: {
+        label:"Enter your content",
+        describedby: "basic-addon2"
+      }%>
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">Accept</button>
+    </div>
+  </div>
+<% end %>
