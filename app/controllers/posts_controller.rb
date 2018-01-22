@@ -23,6 +23,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments.order(created_at: :desc)
     @comment = Comment.new
+    @like =Like.new
     redirect_to root_url and return unless @post
   end
 

@@ -54,14 +54,6 @@ class CommentsController < ApplicationController
         format.json
       end
     end
-    # Comment.find(params[:id]).destroy
-    # # respond_to do |format|
-    # #     format.html
-    # #     format.js
-    # #     format.json
-    # #   end
-    # redirect_to comments_url
-
   end
 
   private
